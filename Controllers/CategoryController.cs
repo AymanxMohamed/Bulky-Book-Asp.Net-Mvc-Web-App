@@ -2,15 +2,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Bulky.Controllers;
 
-[Route("[controller]")]
 public class CategoryController : Controller
 {
-    private readonly ILogger<CategoryController> _logger;
+  private readonly AppDbContext _db;
 
-    public CategoryController(ILogger<CategoryController> logger) => _logger = logger;
+  public CategoryController(AppDbContext db) => _db = db;
 
-    public IActionResult Index() => View();
+  public IActionResult Index() => View(_db.Categories);
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error() => View("Error!");
+  public IActionResult Create() 
+  { 
+    return View();
+  }
 }

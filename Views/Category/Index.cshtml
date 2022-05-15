@@ -1,7 +1,45 @@
+@model IEnumerable<Category>
 @{
     ViewData["Title"] = "Category Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome to Categories Page</h1>
+<h1>Index Category</h1>
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Category List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp; Create new Category
+            </a>
+        </div>
+    </div>
 </div>
+<br>
+
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>Category Name</th>
+            <th>Display Order</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Name</td>
+                <td width="30%">@category.DisplayOrder</td>
+                <td>
+                    <a class="btn btn-success" href="@Url.Action("Edit", "Category", new { id = category.Id })">
+                        Edit
+                    </a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "Category", new { id = category.Id })">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
