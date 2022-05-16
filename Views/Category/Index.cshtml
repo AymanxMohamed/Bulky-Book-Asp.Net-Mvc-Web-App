@@ -32,8 +32,8 @@
                 <td>@category.Name</td>
                 <td width="30%">@category.DisplayOrder</td>
                 <td>
-                    <a class="btn btn-success" href="@Url.Action("Edit", "Category", new { id = category.Id })">
-                        Edit
+                    <a class="btn btn-success" asp-controller="Category" asp-action="Edit" asp-route-id="@category.Id">
+                        <i class="bi bi-pencil-square"></i> Edit
                     </a>
                     <a class="btn btn-danger" href="@Url.Action("Delete", "Category", new { id = category.Id })">
                         Delete
