@@ -12,10 +12,13 @@ public class UnitOfWork : IUnitOfWork
     private readonly AppDbContext _db;
     public ICategoryRepository CategoryRepository { get; }
 
+    public ICoverTypeRepository CoverTypeRepository { get;  }
+
     public UnitOfWork(AppDbContext db)
     {
         _db = db;
         CategoryRepository = new CategoryRepository(_db);
+        CoverTypeRepository = new CoverTypeRepository(_db);
     }
 
     public void Save() => _db.SaveChanges();
