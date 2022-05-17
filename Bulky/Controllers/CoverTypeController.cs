@@ -25,8 +25,11 @@ public class CoverTypeController : Controller
 
     public IActionResult Edit(int? id) => View(_unitOfWork.CoverTypeRepository.GetFirstOrDefault(coverType => coverType.Id == id));
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Edit(CoverType coverType)
     {
+        if (!ModelState.IsValid) return View();
         _unitOfWork.CoverTypeRepository.Update(coverType);
         _unitOfWork.Save();
         return RedirectToAction("Index");
@@ -34,6 +37,8 @@ public class CoverTypeController : Controller
 
     public IActionResult Delete(int? id) => View(_unitOfWork.CoverTypeRepository.GetFirstOrDefault(coverType => coverType.Id == id));
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Delete(CoverType coverType)
     {
         _unitOfWork.CoverTypeRepository.Remove(coverType);
